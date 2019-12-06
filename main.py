@@ -48,6 +48,7 @@ def code():
             memory[pointer] = int(memory[pointer]) % int(CODE[line][1:])
         elif "memPrint" in CODE[line]:
             print("["+name+"]",memory[pointer])
+            out.append(memory[pointer])
         elif "point" in CODE[line]:
             pointer = CODE[line][6:]
         elif CODE[line] == "EXIT":
