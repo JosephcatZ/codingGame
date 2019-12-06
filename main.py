@@ -46,6 +46,16 @@ def code():
             memory[pointer] = int(memory[pointer]) / int(CODE[line][1:])
         elif "%" in CODE[line]:
             memory[pointer] = int(memory[pointer]) % int(CODE[line][1:])
+        elif "+$" in CODE[line]:
+            memory[pointer] = int(memory[pointer]) + memory[int(CODE[line][2:])]
+        elif "-$" in CODE[line]:
+            memory[pointer] = int(memory[pointer]) - memory[int(CODE[line][2:])]
+        elif "*$" in CODE[line]:
+            memory[pointer] = int(memory[pointer]) * memory[int(CODE[line][2:])]
+        elif "/$" in CODE[line]:
+            memory[pointer] = int(memory[pointer]) / memory[int(CODE[line][2:])]
+        elif "%$" in CODE[line]:
+            memory[pointer] = int(memory[pointer]) % memory[int(CODE[line][2:])]
         elif "memPrint" in CODE[line]:
             print("["+name+"]",memory[pointer])
             out.append(memory[pointer])
