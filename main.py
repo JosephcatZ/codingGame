@@ -51,6 +51,8 @@ def code():
             out.append(memory[pointer])
         elif "point" in CODE[line]:
             pointer = CODE[line][6:]
+        elif "memPoint" in CODE[line]:
+            pointer = memory[pointer]
         elif CODE[line] == "EXIT":
             OUT = True
         line += 1
