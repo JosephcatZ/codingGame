@@ -1,5 +1,6 @@
 import time
-memory = None
+memory = {}
+pointer = 0
 def code():
     j = ' '
     code = []
@@ -23,6 +24,7 @@ def code():
     OUT = False
     out = []
     global memory
+    global pointer
     while not OUT:
         if "print" in CODE[line]:
             print("["+name+"]",CODE[line][6:])
@@ -35,17 +37,19 @@ def code():
             if int(memory) == 0:
                 line = int(CODE[line][7:])-1
         elif "+" in CODE[line]:
-            memory = int(memory) + int(CODE[line][1:])
+            memory[pointer] = int(memory[pointer]) + int(CODE[line][1:])
         elif "-" in CODE[line]:
-            memory = int(memory) - int(CODE[line][1:])
+            memory[pointer] = int(memory[pointer]) - int(CODE[line][1:])
         elif "*" in CODE[line]:
-            memory = int(memory) * int(CODE[line][1:])
+            memory[pointer] = int(memory[pointer]) * int(CODE[line][1:])
         elif "/" in CODE[line]:
-            memory = int(memory) / int(CODE[line][1:])
+            memory[pointer] = int(memory[pointer]) / int(CODE[line][1:])
         elif "%" in CODE[line]:
-            memory = int(memory) % int(CODE[line][1:])
+            memory[pointer] = int(memory[pointer]) % int(CODE[line][1:])
         elif "memPrint" in CODE[line]:
-            print("["+name+"]",memory)
+            print("["+name+"]",memory[pointer])
+        elif "point" in CODE[line]:
+            pointer = CODE[line][6:]
         elif CODE[line] == "EXIT":
             OUT = True
         line += 1
