@@ -1,4 +1,5 @@
 import time
+memory = None
 def code():
     j = ' '
     code = []
@@ -21,11 +22,31 @@ def code():
     line = 1
     OUT = False
     out = []
+    global memory
     while not OUT:
         if "print" in CODE[line]:
             print("["+name+"]",CODE[line][6:])
             out.append(CODE[line][6:])
-        if CODE[line] == "EXIT":
+        elif "goto " in CODE[line]:
+            line = int(CODE[line][5:])-1
+        elif "store" in CODE[line]:
+            memory = CODE[line][6:]
+        elif "gotoIf0" in CODE[line]:
+            if int(memory) == 0:
+                line = int(CODE[line][7:])-1
+        elif "+" in CODE[line]:
+            memory = int(memory) + int(CODE[line][1:])
+        elif "-" in CODE[line]:
+            memory = int(memory) - int(CODE[line][1:])
+        elif "*" in CODE[line]:
+            memory = int(memory) * int(CODE[line][1:])
+        elif "/" in CODE[line]:
+            memory = int(memory) / int(CODE[line][1:])
+        elif "%" in CODE[line]:
+            memory = int(memory) % int(CODE[line][1:])
+        elif "memPrint" in CODE[line]:
+            print("["+name+"]",memory)
+        elif CODE[line] == "EXIT":
             OUT = True
         line += 1
     return(out)
